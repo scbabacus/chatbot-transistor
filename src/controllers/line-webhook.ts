@@ -22,12 +22,8 @@ export class LineWebhookController {
       return;
     }
     const { request } = context;
-    const { body: requestBody, rawBody }: {
-      body: string,
-      rawBody: string,
-    } = request as any;
+    const { rawBody, headers } = request;
     const aggregate = this.buildAggregate();
-    const { headers } = request;
     await aggregate.dispatch(new Push(
       pickHeaders(headers),
       rawBody,
@@ -44,10 +40,7 @@ export class LineWebhookController {
 
   private checkSignature(context: ParameterizedContext) {
     const { request, throw: koaThrow } = context;
-    const { rawBody }: {
-      rawBody: string,
-    } = request as any;
-    const { headers } = request;
+    const { rawBody, headers } = request;
     const lineSignature = headers['x-line-signature'];
     if (
       (!isString(lineSignature)) ||
