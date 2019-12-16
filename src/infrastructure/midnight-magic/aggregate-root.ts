@@ -6,8 +6,8 @@ export class AggregateRoot {
   public pendingEvents: any[];
 
   constructor(
-    private readonly handlerMap: MappingEntry[],
-    state: any) {
+    private readonly handlerMap: MappingEntry[] = [],
+    state: any = {}) {
     this.state = state;
     this.pendingEvents = [];
   }
@@ -24,7 +24,9 @@ export class AggregateRoot {
       }
     }
     this.state = state;
-    const { pendingEvents } = this;
-    this.pendingEvents = [...pendingEvents, ...events];
+    this.pendingEvents = [
+      ...this.pendingEvents,
+      ...events,
+    ];
   }
 }
