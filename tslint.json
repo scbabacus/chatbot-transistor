@@ -5,6 +5,7 @@
   ],
   "rules": {
     "no-console": false,
+    "no-this-assignment": false,
     "interface-name": false,
     "object-shorthand-properties-first": false,
     "ter-arrow-parens": false,
